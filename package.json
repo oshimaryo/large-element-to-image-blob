@@ -44,5 +44,12 @@
     "eslint-plugin-import": "^2.7.0",
     "license-checker": "^25.0.1",
     "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "@oshimaryo/get-canvas-max-size": "^0.0.5",
+    "canvas-size": "^1.2.5",
+    "html2canvas": "^1.4.0",
+    "jpeg-js": "^0.4.3",
+    "pngjs": "^6.0.0"
   }
 }
