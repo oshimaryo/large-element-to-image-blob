@@ -1,0 +1,25 @@
+{
+  "name": "@oshimaryo/large-element-to-image-blob",
+  "version": "0.0.1",
+  "description": "convert too large element (> canvas max size) to Blob (jpg/png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oshimaryo/largeElementToImageBlob.git"
+  },
+  "keywords": [
+    "front-end",
+    "canvas",
+    "screenshot",
+    "browser"
+  ],
+  "author": "Ryo Oshima <oshimaryo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oshimaryo/largeElementToImageBlob/issues"
+  },
+  "homepage": "https://github.com/oshimaryo/largeElementToImageBlob#readme"
+}
