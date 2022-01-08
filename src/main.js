@@ -47,7 +47,7 @@ function imageDataToBlob(imageData, type, quality) {
       // in pngjs, default value is 9
       imageData.interlace = false
       imageData.palette = false
-      imageData.depth = 8
+      imageData.depth = 8 // value is 8bit: 0-255
       imageData.color = true
       imageData.colorType = 6 // colorType: 6 = color & alpha.
       imageData.gamma = 0
