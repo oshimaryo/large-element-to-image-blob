@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
+    "build": "node ./esbuild.js",
     "prepublish": "npm run clean && npm run build && npm run build-licenses",
     "build-licenses": "license-checker --production --direct --customPath ./license-checker_customFormat.json --csv --out ./licenses.csv"
   },
@@ -39,6 +39,7 @@
     "babel-preset-minify": "^0.5.0",
     "chai": "^4.1.2",
     "cross-env": "^5.1.3",
+    "esbuild": "^0.14.10",
     "eslint": "^8.6.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.7.0",
