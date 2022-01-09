@@ -80,7 +80,7 @@ export async function largeElementToImageBlob(element, options = { type: 'image/
   const canvasMaxSize = getCanvasMaxSize()
   console.log(canvasMaxSize)
 
-  // maxSize以下なら、普通にrenderして返す
+  // if originalSize < maxSize, use canvas.toBlob()
   if (isSmallerThanMaxSize(originalSize, canvasMaxSize)) {
     console.log('small element')
     const canvas = await html2canvas(element)
