@@ -2,9 +2,10 @@ import canvasSize from 'canvas-size'
 
 import { isSmallerThanMaxSize } from './isSmallerThanMaxSize'
 
-// Type 1. height > maxSize.height：　横幅をoriginalSize.widthで固定して、領域を水平方向に切る
-// Type 2. width > maxSize.width：　縦幅をoriginalSize.heightで固定して、領域を垂直方向に切る
+// Type 1. height > maxSize.height：　Fix the width and cut the area horizontally.
+// Type 2. width > maxSize.width：　Fix the height and cut the area vertically.
 // Type 3. width　 > maxSize.width && height > maxSize.height：
+// temp solution: devide the area into squares.
 // 一番少なくてすむ分割方法が不明。とりあえず、正方形に分割する
 // - 縦横比を保持して分割する?
 // - どちらかを小さい方を、最低限必要な数で分割して、逆は可能なかぎり大きくする？

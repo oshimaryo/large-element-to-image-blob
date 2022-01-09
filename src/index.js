@@ -26,7 +26,7 @@ function mergeImageData(baseData, baseSize, srcData, offset) {
     for (let x = 0; x < width; x++) {
       const dstIndex = (y + top) * baseSize.width + x + left
       const srcIndex = y * width + x
-      // Arrayは参照渡しなので、引数のbaseDataそのものが書き換えられる
+      // Passed baseData itself is rewrited.
       baseData[dstIndex] = srcDataUint32Array[srcIndex]
     }
   }
@@ -43,7 +43,7 @@ function imageDataToBlob(imageData, type, quality) {
     case 'image/png':
       // TODO: #3 add `deflateLevel` params for PNG.sync.write
       // https://github.com/lukeapage/pngjs#options
-      // deflateLevelは、zlib.jsのパラメータ。
+      // deflateLevel is a parmeter of zlib.js
       // in pngjs, default value is 9
       imageData.interlace = false
       imageData.palette = false
@@ -58,7 +58,7 @@ function imageDataToBlob(imageData, type, quality) {
 }
 
 // html2canvas specs: https://html2canvas.hertzen.com/features
-// 既知の問題点:　font-features-settings: 'halt' が未対応のため、『、「、・等のあとの１文字が、半角ズレる
+// Known Issue:　font-features-settings: 'halt' is not supported well. `『`.`「`, `・` 等のあとの１文字が、半角ズレる。
 // element: HTMLElement
 // viewport: ViewPort
 async function renderElementInViewport(element, viewport) {
@@ -85,17 +85,17 @@ export async function largeElementToImageBlob(element, options = { type: 'image/
     console.log('small element')
     const canvas = await html2canvas(element)
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, type, quality))
-    // TODO: #2 largeElementToImageBlobは、Promiseを返すように
+    // TODO: #2 `largeElementToImageBlob` should handle Error
     return blob
   }
 
-  // 8bit 4チャンネル（RGBA）を、Uint32Arrayの1要素にまとめる
-  // すべてのcanvasをmergeしたあとに Uint8ClampedArray に変換する
+  // Combine 8bit 4 channels (RGBA) into one element of Uint32Array.
+  // `resultData` will be converted to Uint8ClampedArray after merging all canvases.
   let resultData = new Uint32Array(width * height)
 
-  // 領域の大きさ（Size）を分割して複数の viewport に変換し、
-  // それぞれの viewport について、canvasを作成して描画
-  // canvasは都度、1つの　Uint32Arrayにまとめてから破棄する
+  // Split the size of the area (originalSize) and convert it to multiple viewports.
+  // For each viewport, create a canvas and render it.
+  // The canvas is merged into a Uint32Array and then released each time.
   console.log('start rendering')
   for (const viewport of splitSizeIntoViewports(originalSize, canvasMaxSize)) {
     const canvas = await renderElementInViewport(element, viewport)
@@ -110,6 +110,6 @@ export async function largeElementToImageBlob(element, options = { type: 'image/
 
   const data = Uint32ArrayToUint8ClampedArray(resultData)
 
-  // TODO: #2 largeElementToImageBlobは、Promiseを返すように
+  // TODO: #2 `largeElementToImageBlob` should handle Error
   return imageDataToBlob({ data, width, height }, type, quality)
 }
